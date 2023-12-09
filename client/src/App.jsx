@@ -1,14 +1,17 @@
 import React from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Header, Main } from "./components";
 
 import { logo } from "./assets";
+import styles from "./styles";
 import { Home, CreatePost } from "./pages";
 
 const App = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Main />
+    </BrowserRouter>
   );
 };
 
