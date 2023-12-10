@@ -16,13 +16,21 @@ const CreatePost = () => {
   const [loading, setLoading] = useState(false);
   const [generatingImg, setGeneratingImg] = useState(false);
 
-  const handleChange = (e) => {};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
-  const handleSurpriseMe = () => {};
+  const generateImage = () => {};
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -43,7 +51,7 @@ const CreatePost = () => {
             type="text"
             name="name"
             placeholder="Yusuf Tomilola"
-            value={form.prompt}
+            value={form.name}
             handleChange={handleChange}
           />
 
@@ -52,7 +60,7 @@ const CreatePost = () => {
             type="text"
             name="prompt"
             placeholder="panda mad scientist mixing sparkling chemicals, digital art"
-            value={form.name}
+            value={form.prompt}
             handleChange={handleChange}
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
@@ -79,6 +87,30 @@ const CreatePost = () => {
               </div>
             )}
           </div>
+        </div>
+
+        <div className="mt-2 flex gap-5">
+          <button
+            type="button"
+            onClick={generateImage}
+            className="text-white bg-[#ff6464] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          >
+            {generatingImg ? "Generating..." : "Generate"}
+          </button>
+        </div>
+
+        <div className="mt-10">
+          <p className="mt-2 text-[#666e75] text-[14px]">
+            Once you have created the image you want, you can share it with your
+            friends
+          </p>
+
+          <button
+            type="submit"
+            className="mt-3 text-white bg-[#202020] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+          >
+            {loading ? "Sharing..." : "Share with friends"}
+          </button>
         </div>
       </form>
     </section>

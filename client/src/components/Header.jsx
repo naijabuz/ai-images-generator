@@ -7,7 +7,7 @@ import styles from "../styles";
 const Header = () => {
   return (
     <header
-      className={`w-full flex justify-between items-center ${styles.header_bg} sm:px-8 py-4 border-b border-b-[#e6ebf4]`}
+      className={`w-full flex justify-between items-center ${styles.header_bg} sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4]`}
     >
       <Link to="/">
         <img
