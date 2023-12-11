@@ -22,6 +22,37 @@ const Home = () => {
   const [searchText, setSearchText] = useState("");
   //   const [dispatch,state] = useReducer(homeReducer,initialState);
 
+  useEffect(() => {
+    setLoading(true);
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/v1/post", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        console.log("Response status:", response.status);
+
+        if (response.ok) {
+          const result = await response.json();
+
+          setAllPosts(result.data.reverse());
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        alert(
+          "An error occurred while fetching posts. Please try again later."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -56,7 +87,7 @@ const Home = () => {
               {searchText ? (
                 <RenderCards data={[]} title="No search results found" />
               ) : (
-                <RenderCards data={[]} title="No posts found" />
+                <RenderCards data={allPosts} title="No posts found" />
               )}
             </div>
           </>

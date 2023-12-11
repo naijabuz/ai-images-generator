@@ -1,6 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
+
 import Post from "../mongodb/models/post.js";
 
 dotenv.config();
@@ -17,9 +18,10 @@ cloudinary.config({
 router.route("/").get(async (req, res) => {
   try {
     const posts = await Post.find({});
-
+    res.status(200).json({ success: true, data: posts });
+  } catch (error) {
     res.status(500).json({ success: false, message: error });
-  } catch (error) {}
+  }
 });
 
 // create a post
